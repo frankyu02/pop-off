@@ -1,3 +1,5 @@
+class_name BaseCap
+
 extends CharacterBody2D
 
 
@@ -14,13 +16,14 @@ func calcDistanceToMouse(mousePos: Vector2):
 	
 func _ready() -> void:
 	var c = get_node('CollisionShape2D')
+	assert(c, "Inherited Caps should have ")
 	threshold = c.shape.radius
 
 func _input(event: InputEvent) -> void:
-	var spriteNode = get_node("Sprite2D")
+	var spriteNode = get_node("AnimatedSprite2D")
+	assert(spriteNode, "Inherited Caps should have animated Sprite")
 	if not spriteNode: return 
 	if event is InputEventMouseButton:
-		
 		if event.is_pressed() and event.button_index == 1 and calcDistanceToMouse(event.global_position) < threshold:
 			print("ok")
 			

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://kmlik5374fff"]
 
-[ext_resource type="Texture2D" uid="uid://bv5kpnwn3obx0" path="res://white.png" id="1_n0uot"]
-[ext_resource type="PackedScene" uid="uid://i2p1aa0w4vxh" path="res://Scenes/cap_base.tscn" id="2_c0077"]
+[ext_resource type="Texture2D" uid="uid://te7hvv7vhwwq" path="res://Assets/white.png" id="1_wt8s7"]
+[ext_resource type="PackedScene" uid="uid://ct3lvutyeqalp" path="res://Scenes/kumagama.tscn" id="2_qbsoj"]
 
 [node name="Board" type="Node2D"]
 position = Vector2(1, 6)
@@ -17,7 +17,7 @@ gravity = 0.0
 self_modulate = Color(0.784204, 0.685829, 1.54018e-06, 1)
 position = Vector2(-53, -10)
 scale = Vector2(1112.26, 614.299)
-texture = ExtResource("1_n0uot")
+texture = ExtResource("1_wt8s7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 visible = false
@@ -25,5 +25,5 @@ position = Vector2(1, 0)
 scale = Vector2(1273.18, 585.466)
 polygon = PackedVector2Array(-0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_c0077")]
-position = Vector2(527, 249)
+[node name="Kumagama" parent="." instance=ExtResource("2_qbsoj")]
+position = Vector2(108, 548)
