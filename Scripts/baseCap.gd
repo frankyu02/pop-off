@@ -2,9 +2,6 @@ class_name BaseCap
 
 extends CharacterBody2D
 
-
-const SPEED = 3.0
-const JUMP_VELOCITY = -4.0
 var threshold := 0
 var dragging := false
 
