@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://kmlik5374fff"]
+
+[ext_resource type="Texture2D" uid="uid://bv5kpnwn3obx0" path="res://white.png" id="1_n0uot"]
+[ext_resource type="PackedScene" uid="uid://i2p1aa0w4vxh" path="res://Scenes/cap_base.tscn" id="2_c0077"]
+
+[node name="Board" type="Node2D"]
+position = Vector2(1, 6)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(635, 326)
+gravity_space_override = 3
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 0.0
+
+[node name="Background (tmp)" type="Sprite2D" parent="Area2D"]
+self_modulate = Color(0.784204, 0.685829, 1.54018e-06, 1)
+position = Vector2(-53, -10)
+scale = Vector2(1112.26, 614.299)
+texture = ExtResource("1_n0uot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
+position = Vector2(1, 0)
+scale = Vector2(1273.18, 585.466)
+polygon = PackedVector2Array(-0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_c0077")]
+position = Vector2(527, 249)
