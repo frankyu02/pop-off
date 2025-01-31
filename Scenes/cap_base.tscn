@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://i2p1aa0w4vxh"]
+[gd_scene load_steps=3 format=3 uid="uid://i2p1aa0w4vxh"]
 
-[ext_resource type="Script" path="res://Scripts/baseCap.gd" id="1_8cb2x"]
+[ext_resource type="Script" path="res://Scripts/baseCapRB.gd" id="1_jdhkr"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_8cb2x")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmyqf"]
+friction = 0.0
+bounce = 0.3
+
+[node name="CapBase" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_dmyqf")
+gravity_scale = 0.0
+linear_damp_mode = 1
+linear_damp = 0.5
+angular_damp = 3.04
+script = ExtResource("1_jdhkr")

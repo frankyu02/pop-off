@@ -123,13 +123,28 @@ radius = 32.0
 
 [node name="Kumagama" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_wpsuy")]
+[node name="CapBase" parent="." instance=ExtResource("1_wpsuy")]
 script = ExtResource("2_s5gm2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CapBase"]
 sprite_frames = SubResource("SpriteFrames_lf554")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CapBase"]
 shape = SubResource("CircleShape2D_p14m8")
+
+[node name="VelocityLabel" type="Label" parent="CapBase"]
+offset_left = -40.0
+offset_top = -54.0
+offset_right = 40.0
+offset_bottom = -31.0
+text = "Stationary"
+
+[node name="WeightLabel" type="Label" parent="CapBase"]
+offset_left = -13.0
+offset_top = -74.0
+offset_right = 27.0
+offset_bottom = -51.0
+text = "0
+"
