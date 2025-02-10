@@ -2,7 +2,8 @@ extends BaseCap
 
 func _init() -> void:
 	self.mass = 1
-	#self.mass = floor(RandomNumberGenerator.new().randf_range(1.0, 5.0))
-	self.friction = RandomNumberGenerator.new().randf()
-#func customOnReady() -> void:
-	#self.scaleCap(5)
+	self.linear_damp = 0.3
+
+func customOnReady():
+	assert(self.collisionNode, "Inherited Caps should have CollisionNode2D")
+	self.threshold = self.collisionNode.shape.radius

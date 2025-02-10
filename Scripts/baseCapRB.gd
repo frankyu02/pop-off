@@ -14,7 +14,8 @@ var spriteNode = null
 var collisionNode = null
 var arrow = preload("res://Scenes/arrow.tscn")
 var arrowInstance := arrow.instantiate()
-var launched := false
+var launched := true
+var posArrow = null
 
 func calcDistanceToMouse(mousePos: Vector2):
 	var distX = abs(mousePos.x - global_position.x)
@@ -31,12 +32,20 @@ func scaleCap(factor: int) -> void:
 	
 func customOnReady() -> void:
 	pass
+
+func startTurn() -> void:
+	self.launched = false
+	posArrow.position.y -= threshold + 40
+	posArrow.show()
 	
+func endTurn() -> void:
+	posArrow.hide()
+	pass
+	
+		
 func _ready() -> void:
 	spriteNode = get_node("AnimatedSprite2D")
 	collisionNode = get_node('CollisionShape2D')
-	assert(collisionNode, "Inherited Caps should have ")
-	threshold = collisionNode.shape.radius
 	gravity_scale = 0
 	lock_rotation = true
 	label = self.find_child("VelocityLabel")
@@ -49,12 +58,16 @@ func _ready() -> void:
 	if weightLabel:
 		weightLabel.text = str(self.friction)
 		weightLabel.set("theme_override_colors/font_color", Color.BLACK)
-	
+	posArrow = arrow.instantiate()
+	add_child(posArrow)
+	posArrow.scale.x *= 0.5
+	posArrow.rotation = 26.7
+	posArrow.color = Color("Black")
+	posArrow.hide()
 	customOnReady()
 
 func _input(event: InputEvent) -> void:
 	var spriteNode = get_node("AnimatedSprite2D")
-	assert(spriteNode, "Inherited Caps should have animated Sprite")
 	if not spriteNode: return 
 	if event is InputEventMouseButton:
 		# don't allow movement while launching
@@ -66,15 +79,17 @@ func _input(event: InputEvent) -> void:
 		if event.is_released() and event.button_index == 1 and initialMousePosition.length() != 0:
 			releasedMousePosition = event.global_position
 			dragging = false
+			posArrow.hide()
 			
 func _physics_process(delta: float) -> void:
 	if(linear_velocity.length() < 30):
 		linear_velocity = Vector2.ZERO
-		
-	if linear_velocity.length() == 0 and label:
-		label.text = str(linear_velocity.length())
-	else:
-		label.text = str(linear_velocity.length())
+	
+	if label:	
+		if linear_velocity.length() == 0:
+			label.text = str(linear_velocity.length())
+		else:
+			label.text = str(linear_velocity.length())
 	
 	if dragging:
 		add_child(arrowInstance)
@@ -99,6 +114,7 @@ func _physics_process(delta: float) -> void:
 		arrowInstance.global_position = self.global_position
 		arrowInstance.texture = gradient_texture
 		if label: label.text = "Dragging"
+	
 	if not dragging:
 		remove_child(arrowInstance)
 		if releasedMousePosition.length() != 0:

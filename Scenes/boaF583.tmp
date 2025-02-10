@@ -61,7 +61,7 @@ debug_color = Color(0.994536, 0, 0.220482, 0.42)
 unique_name_in_owner = true
 
 [node name="CapBase" parent="Player1Caps" instance=ExtResource("3_bqutu")]
-position = Vector2(254, 164)
+position = Vector2(254, 165)
 
 [node name="CapBase2" parent="Player1Caps" instance=ExtResource("3_bqutu")]
 position = Vector2(142, 338)

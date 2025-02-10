@@ -1,47 +1,52 @@
-[gd_scene load_steps=16 format=3 uid="uid://ct3lvutyeqalp"]
+[gd_scene load_steps=18 format=3 uid="uid://ct3lvutyeqalp"]
 
-[ext_resource type="PackedScene" uid="uid://i2p1aa0w4vxh" path="res://Scenes/cap_base.tscn" id="1_wpsuy"]
-[ext_resource type="Texture2D" uid="uid://d11e6u2x0ehcf" path="res://Assets/Kumagama/Kumagama_idle.png" id="2_qbjix"]
-[ext_resource type="Script" path="res://Scripts/kumagama.gd" id="2_s5gm2"]
+[ext_resource type="Script" path="res://Scripts/kumagamaPiece.gd" id="1_6g7ey"]
+[ext_resource type="PackedScene" uid="uid://i2p1aa0w4vxh" path="res://Scenes/cap_base.tscn" id="1_l67an"]
+[ext_resource type="Script" path="res://Scripts/kumagama.gd" id="2_h16qr"]
+[ext_resource type="Texture2D" uid="uid://d11e6u2x0ehcf" path="res://Assets/Kumagama/Kumagama_idle.png" id="3_v21cn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mh7lc"]
+friction = 0.0
+bounce = 0.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_124oa"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etclf"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yocjb"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygwgm"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2bwh"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igtf4"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hntbg"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hjkn"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7boss"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb31o"]
-atlas = ExtResource("2_qbjix")
+atlas = ExtResource("3_v21cn")
 region = Rect2(576, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lf554"]
@@ -122,9 +127,13 @@ animations = [{
 radius = 32.0
 
 [node name="Kumagama" type="Node2D"]
+script = ExtResource("1_6g7ey")
 
-[node name="CapBase" parent="." instance=ExtResource("1_wpsuy")]
-script = ExtResource("2_s5gm2")
+[node name="CapBase" parent="." instance=ExtResource("1_l67an")]
+physics_material_override = SubResource("PhysicsMaterial_mh7lc")
+linear_damp = -1.0
+angular_damp = 0.0
+script = ExtResource("2_h16qr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CapBase"]
 sprite_frames = SubResource("SpriteFrames_lf554")
