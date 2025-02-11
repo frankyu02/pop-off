@@ -11,8 +11,8 @@ signal died(pieceId: int)
 func kill() -> void:
 	print("Working")
 	var id = self.get_instance_id()
-	died.emit(id)
 	self.queue_free()
+	died.emit(id)
 
 func _ready() -> void:
 	killCollission.set_collision_layer_value(10, true)
