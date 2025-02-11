@@ -1,12 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://kmlik5374fff"]
+[gd_scene load_steps=8 format=3 uid="uid://kmlik5374fff"]
 
 [ext_resource type="PackedScene" uid="uid://ssr5tw06htmx" path="res://Scenes/GameManager.tscn" id="1_6nqcn"]
 [ext_resource type="Texture2D" uid="uid://te7hvv7vhwwq" path="res://Assets/white.png" id="1_wt8s7"]
-[ext_resource type="PackedScene" uid="uid://s12m28j4pgr2" path="res://Scenes/kill_zone.tscn" id="4_fnsos"]
 [ext_resource type="FontFile" uid="uid://bjb2nuokg7gxs" path="res://Fonts/PixelOperator8.ttf" id="4_ny5tw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpjsi"]
-size = Vector2(1158, 32)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xh2g7"]
+a = Vector2(491, -303)
+b = Vector2(494, 310)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3nohg"]
+a = Vector2(-620, -303)
+b = Vector2(-618, 310)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bxica"]
+a = Vector2(1128, 22)
+b = Vector2(17, 25)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dyy5n"]
+a = Vector2(1131, 639)
+b = Vector2(17, 636)
 
 [node name="Board" type="Node2D"]
 position = Vector2(1, 6)
@@ -25,11 +37,31 @@ position = Vector2(-62, 3)
 scale = Vector2(1112.26, 614.299)
 texture = ExtResource("1_wt8s7")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(635, 326)
+shape = SubResource("SegmentShape2D_xh2g7")
+debug_color = Color(0.994219, 0, 0.225582, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(635, 326)
+shape = SubResource("SegmentShape2D_3nohg")
+debug_color = Color(0.994219, 0, 0.225582, 0.42)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_bxica")
+debug_color = Color(0.979738, 0, 0.385549, 0.42)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_dyy5n")
+debug_color = Color(0.994536, 0, 0.220482, 0.42)
+
 [node name="Player1Caps" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Node2D" type="Node2D" parent="Player1Caps"]
-position = Vector2(195, 54)
+position = Vector2(195, 151)
 
 [node name="Node2D2" type="Node2D" parent="Player1Caps"]
 position = Vector2(195, 331)
@@ -51,7 +83,7 @@ position = Vector2(936, 477)
 
 [node name="EndTurnButton" type="Button" parent="."]
 unique_name_in_owner = true
-z_index = 10
+visibility_layer = 17
 offset_left = 952.0
 offset_top = 540.0
 offset_right = 1066.0
@@ -60,10 +92,3 @@ scale = Vector2(1.72304, 1.72768)
 theme_override_fonts/font = ExtResource("4_ny5tw")
 theme_override_font_sizes/font_size = 16
 text = "End Turn"
-
-[node name="KillZone" parent="." instance=ExtResource("4_fnsos")]
-collision_mask = 512
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
-position = Vector2(578, 3)
-shape = SubResource("RectangleShape2D_wpjsi")
