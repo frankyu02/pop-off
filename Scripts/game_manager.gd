@@ -1,3 +1,4 @@
+class_name GameManager
 extends Node
 
 #these pieces should be passed in as props
@@ -5,6 +6,7 @@ var playerOnePieces := ["kumagama", "kumagama", "kumagama"]
 var playerTwoPieces := ["kumagama", "kumagama", "kumagama"]
 var pieceInstances: Array[GamePiece] = []
 var curTurnIndex := 0
+signal switchTurn(playerType: GamePiece.SIDE)
 @onready var end_turn_button: Button = %EndTurnButton
 
 func validPieceInstance(piece) -> bool:
@@ -14,7 +16,9 @@ func startPieceTurn(idx: int) -> void:
 	print(idx)
 	assert(idx < len(pieceInstances), "something went wrong with start turn order logic. Got index: " + str(idx))
 	var curInstance := pieceInstances[idx]
+	# If piece is in play (didn't die), start its turn
 	if validPieceInstance(curInstance.piece):
+		switchTurn.emit(curInstance.side)
 		curInstance.piece.get_node("CapBase").startTurn()
 	else:
 		curTurnIndex = (curTurnIndex + 1) % len(pieceInstances)
