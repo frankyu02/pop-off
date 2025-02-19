@@ -7,6 +7,33 @@
 [ext_resource type="FontFile" uid="uid://bp4mbm13ds8sx" path="res://Fonts/PixelOperator8-Bold.ttf" id="5_w0fs7"]
 [ext_resource type="Script" path="res://Scripts/turn_label.gd" id="6_18q11"]
 
+[sub_resource type="Animation" id="Animation_keu5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-288, 21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_jqmnn"]
 resource_name = "Show"
 length = 3.0
@@ -33,33 +60,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_keu5v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-288, 21)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_45177"]
@@ -181,3 +181,15 @@ position = Vector2(1695.06, 30.7538)
 rotation = 1.5708
 scale = Vector2(0.555661, -1.37867)
 shape = SubResource("RectangleShape2D_wpjsi")
+
+[node name="VictoryLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 333.0
+offset_top = 264.0
+offset_right = 384.0
+offset_bottom = 282.0
+scale = Vector2(9.57606, 5.882)
+theme_override_fonts/normal_font = ExtResource("4_ny5tw")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[color=#000000][color=#4ab3ff]P1[/color] Wins![/color]"

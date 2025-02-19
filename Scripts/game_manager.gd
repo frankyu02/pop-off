@@ -6,13 +6,33 @@ var playerOnePieces := ["kumagama", "kumagama", "kumagama"]
 var playerTwoPieces := ["kumagama", "kumagama", "kumagama"]
 var pieceInstances: Array[GamePiece] = []
 var curTurnIndex := 0
+var numP1 := 3
+var numP2 := 3
 signal switchTurn(playerType: GamePiece.SIDE)
 @onready var end_turn_button: Button = %EndTurnButton
+@onready var victory_label: RichTextLabel = %VictoryLabel
 
 func validPieceInstance(piece) -> bool:
 	return is_instance_valid(piece) and not piece.is_queued_for_deletion()
-	
+
+func endGame() -> void:
+	for gamePiece in pieceInstances:
+		if validPieceInstance(gamePiece.piece):
+			gamePiece.piece.setVelocity(Vector2())
+			gamePiece.piece.setLaunchedStatus(true)
+	self.victory_label.clear()
+	if numP1 == 0 and numP2 == 0:
+		self.victory_label.add_text("Tie!")
+	elif numP2 == 0:
+		self.victory_label.append_text("[color=#000000][color=#4ab3ff]P1[/color] Wins![/color]")
+	else :
+		self.victory_label.append_text("[color=#000000][color=#eb2214]P2[/color] Wins![/color]")
+	self.victory_label.show()
+		
 func startPieceTurn(idx: int) -> void:
+	if gameEnded():
+		endGame()
+		return
 	print(idx)
 	assert(idx < len(pieceInstances), "something went wrong with start turn order logic. Got index: " + str(idx))
 	var curInstance := pieceInstances[idx]
@@ -35,6 +55,11 @@ func handleEndTurn() -> void:
 
 func handlePieceDeath(id: int) -> void:
 	var curPieceId := pieceInstances[curTurnIndex].piece.get_instance_id()
+	var killedPiece: GamePiece = pieceInstances.filter(func (instance: GamePiece): return is_instance_valid(instance.piece) and instance.piece.get_instance_id() == id)[0]
+	if killedPiece.side == GamePiece.SIDE.P1:
+		numP1 -= 1
+	else:
+		numP2 -= 1
 	#pieceInstances = pieceInstances.filter(func (instance: BasePiece): return instance.get_instance_id() != id)
 	
 	# if current playing piece dies, move onto next piece. Otherwise, wait for end turn
@@ -43,6 +68,7 @@ func handlePieceDeath(id: int) -> void:
 	
 	
 func _ready() -> void:
+	self.victory_label.hide()
 	self.end_turn_button.pressed.connect(handleEndTurn)
 	var playerOneCaps := self.get_node("%Player1Caps") as Node
 	var playerTwoCaps := self.get_node("%Player2Caps") as Node
@@ -82,6 +108,9 @@ func getVelocity(piece: BasePiece):
 	if not rigidBody:
 		return 0
 	return rigidBody.linear_velocity.length()
+
+func gameEnded():
+	return numP1 == 0 or numP2 == 0
 	
 func _process(_delta: float) -> void:
 	var sumVelocity = 0
@@ -92,6 +121,9 @@ func _process(_delta: float) -> void:
 	if sumVelocity != 0:
 		self.end_turn_button.hide()
 	else:
-		self.end_turn_button.show()
+		if gameEnded():
+			endGame()
+		else:
+			self.end_turn_button.show()
 		
 	

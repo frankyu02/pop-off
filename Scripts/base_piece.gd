@@ -18,6 +18,12 @@ func kill() -> void:
 	tween.tween_callback(self.queue_free)
 	tween.tween_callback(func (): self.died.emit(id))
 
+func setVelocity(newVelocity: Vector2):
+	self.cap_base.linear_velocity = newVelocity
+
+func setLaunchedStatus(status: bool):
+	self.cap_base.launched = status
+	
 func _ready() -> void:
 	killCollission.set_collision_layer_value(10, true)
 	killCollission.set_collision_layer_value(1, false)
