@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kmlik5374fff"]
+[gd_scene load_steps=13 format=3 uid="uid://kmlik5374fff"]
 
 [ext_resource type="PackedScene" uid="uid://ssr5tw06htmx" path="res://Scenes/GameManager.tscn" id="1_6nqcn"]
 [ext_resource type="Texture2D" uid="uid://te7hvv7vhwwq" path="res://Assets/white.png" id="1_wt8s7"]
@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://bjb2nuokg7gxs" path="res://Fonts/PixelOperator8.ttf" id="4_ny5tw"]
 [ext_resource type="FontFile" uid="uid://bp4mbm13ds8sx" path="res://Fonts/PixelOperator8-Bold.ttf" id="5_w0fs7"]
 [ext_resource type="Script" path="res://Scripts/turn_label.gd" id="6_18q11"]
+[ext_resource type="PackedScene" uid="uid://cxjac2u4mdp2w" path="res://Scenes/bouncer.tscn" id="7_418im"]
+[ext_resource type="PackedScene" uid="uid://cagg7bso3i0sf" path="res://Scenes/ruler.tscn" id="8_22a5e"]
 
 [sub_resource type="Animation" id="Animation_keu5v"]
 length = 0.001
@@ -149,7 +151,7 @@ position = Vector2(1, 6)
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zones/KillZone"]
-position = Vector2(578, 3)
+position = Vector2(578, -7)
 shape = SubResource("RectangleShape2D_wpjsi")
 
 [node name="KillZone2" parent="Kill Zones" instance=ExtResource("4_fnsos")]
@@ -157,7 +159,7 @@ position = Vector2(-11, 658)
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zones/KillZone2"]
-position = Vector2(578, 3)
+position = Vector2(578, 15)
 shape = SubResource("RectangleShape2D_wpjsi")
 
 [node name="KillZone4" parent="Kill Zones" instance=ExtResource("4_fnsos")]
@@ -166,7 +168,7 @@ rotation = 0.0019151
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zones/KillZone4"]
-position = Vector2(540.056, 28.9658)
+position = Vector2(524.056, 28.9964)
 rotation = 1.5708
 scale = Vector2(0.555661, -1.37867)
 shape = SubResource("RectangleShape2D_wpjsi")
@@ -177,13 +179,15 @@ rotation = 0.0019151
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zones/KillZone5"]
-position = Vector2(1695.06, 30.7538)
+position = Vector2(1708.06, 27.729)
 rotation = 1.5708
 scale = Vector2(0.555661, -1.37867)
 shape = SubResource("RectangleShape2D_wpjsi")
 
 [node name="VictoryLabel" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
+visible = false
+z_index = 20
 offset_left = 333.0
 offset_top = 264.0
 offset_right = 384.0
@@ -193,3 +197,13 @@ theme_override_fonts/normal_font = ExtResource("4_ny5tw")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[color=#000000][color=#4ab3ff]P1[/color] Wins![/color]"
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Bouncer" parent="Walls" instance=ExtResource("7_418im")]
+position = Vector2(57, 176)
+rotation = 1.55971
+scale = Vector2(0.346893, 0.56308)
+
+[node name="Ruler" parent="Walls" instance=ExtResource("8_22a5e")]
+position = Vector2(537, 37)

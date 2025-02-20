@@ -15,7 +15,7 @@ var collisionNode: CollisionShape2D = null
 var arrow = preload("res://Scenes/arrow.tscn")
 @onready var arrowInstance := arrow.instantiate()
 var launched := true
-var posArrow = null
+var posArrow: Polygon2D = null
 
 func calcDistanceToMouse(mousePos: Vector2):
 	var distX = abs(mousePos.x - global_position.x)
@@ -30,6 +30,7 @@ func scaleCap(factor: float) -> void:
 		collisionNode.shape.radius = (64 * factor) / 2
 		self.threshold = collisionNode.shape.radius
 		posArrow.position.y = self.position.y - self.threshold - 40
+
 func customOnReady() -> void:
 	pass
 
@@ -60,7 +61,7 @@ func _ready() -> void:
 	posArrow = arrow.instantiate()
 	add_child(posArrow)
 	posArrow.scale.x *= 0.5
-	posArrow.rotation = 26.7
+	posArrow.rotation_degrees = 90
 	posArrow.color = Color("Black")
 	posArrow.position.y = self.position.y - threshold - 40
 	posArrow.hide()

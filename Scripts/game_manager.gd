@@ -16,6 +16,7 @@ func validPieceInstance(piece) -> bool:
 	return is_instance_valid(piece) and not piece.is_queued_for_deletion()
 
 func endGame() -> void:
+	self.end_turn_button.hide()
 	for gamePiece in pieceInstances:
 		if validPieceInstance(gamePiece.piece):
 			gamePiece.piece.setVelocity(Vector2())

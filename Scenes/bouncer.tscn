@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxjac2u4mdp2w"]
+
+[ext_resource type="Texture2D" uid="uid://bhxl63e507lcc" path="res://Assets/Eraser.png" id="1_811bp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w6u53"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jh5v"]
+size = Vector2(519.493, 100.385)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc8o3"]
+atlas = ExtResource("1_811bp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qmr8u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc8o3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bouncer" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_w6u53")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(252.217, 49.5)
+scale = Vector2(0.971014, -0.866667)
+shape = SubResource("RectangleShape2D_1jh5v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+position = Vector2(251.5, 100)
+scale = Vector2(15.7813, 6.25)
+sprite_frames = SubResource("SpriteFrames_qmr8u")

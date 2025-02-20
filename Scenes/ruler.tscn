@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cagg7bso3i0sf"]
+
+[ext_resource type="Texture2D" uid="uid://cvm5y53yhsjsy" path="res://Assets/Obstacles.png" id="1_5qvv7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0c8mc"]
+size = Vector2(22.9332, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r4vp"]
+atlas = ExtResource("1_5qvv7")
+region = Rect2(0, 0, 49, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r547u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r4vp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ruler" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, 17.5)
+scale = Vector2(17.4744, 1)
+shape = SubResource("RectangleShape2D_0c8mc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+position = Vector2(30, 41)
+scale = Vector2(8.37241, 4.63899)
+sprite_frames = SubResource("SpriteFrames_r547u")
